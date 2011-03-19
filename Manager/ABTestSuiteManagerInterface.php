@@ -2,8 +2,6 @@
 
 namespace AB\ABBundle\Manager;
 
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
-
 /**
  * AB tests manager: a "manager" will basically
  * handle the retrieving of test suites.
@@ -19,5 +17,14 @@ interface ABTestSuiteManagerInterface
      * @return array(ABTestSuiteInterface)
      */
     public function getActiveTestSuites();
+
+    /**
+     * Retrieves a test suite by its UID.
+     *
+     * @param string $uid
+     *
+     * @return ABTestSuiteInterface
+     */
+    public function getTestSuite($uid);
 
 }

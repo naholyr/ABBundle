@@ -21,4 +21,14 @@ class MockManager implements ABTestSuiteManagerInterface
         return $this->test_suites;
     }
 
+    public function getTestSuite($uid)
+    {
+        $found = array_filter($this->test_suites, function(ABTestSuiteInterface $test_suite) use ($uid)
+        {
+            return $test_suite->getUID() == $uid;
+        });
+
+        return count($found) > 0 ? $found[0] : null;
+    }
+
 }

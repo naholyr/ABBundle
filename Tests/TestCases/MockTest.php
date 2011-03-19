@@ -29,6 +29,7 @@ class MockTestCase extends PHPUnit_Framework_TestCase
     public function testManager()
     {
         $this->assertEquals($this->manager->getActiveTestSuites(), array($this->test_suite));
+        $this->assertEquals($this->manager->getTestSuite('colors'), $this->test_suite);
     }
 
     public function testSession()
