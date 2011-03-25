@@ -1,6 +1,6 @@
 <?php
 
-namespace AB\ABBundle\TestSuite;
+namespace AB\ABBundle\Documents;
 
 /**
  * @Document
@@ -14,6 +14,12 @@ class ABTestSuiteDoctrineODMImpl implements ABTestSuiteInterface
      * @Id
      */
     private $id;
+
+    /**
+     * @String
+     * @UniqueIndex(order="asc")
+     */
+    private $uid;
 
     /**
      * @String
@@ -42,7 +48,7 @@ class ABTestSuiteDoctrineODMImpl implements ABTestSuiteInterface
 
     public function getUID()
     {
-        return strval($this->id);
+        return $this->uid;
     }
 
     private function checkVersion($version)
@@ -59,7 +65,8 @@ class ABTestSuiteDoctrineODMImpl implements ABTestSuiteInterface
 
     public function addVersion($version)
     {
-
+        $this->versions[] = $version;
+        $this->scores[$version] = 0;
     }
 
     public function getAvailableVersions()
