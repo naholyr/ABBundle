@@ -23,13 +23,19 @@ class MockTestCase extends PHPUnit_Framework_TestCase
         $this->test_suite->addReplace('red', array('white' => 'red'));
         $this->test_suite->addReplace('blue', array('white' => 'blue'));
 
-        $this->manager->addTestSuite($this->test_suite);
+        $this->manager->persist($this->test_suite);
     }
 
     public function testManager()
     {
         $this->assertEquals($this->manager->getActiveTestSuites(), array($this->test_suite));
         $this->assertEquals($this->manager->getTestSuite('colors'), $this->test_suite);
+
+        $this->manager->remove($this->test_suite);
+        $this->assertEquals($this->manager->getActiveTestSuites(), array());
+
+        $this->manager->persist($this->test_suite);
+        $this->assertEquals($this->manager->getActiveTestSuites(), array($this->test_suite));
     }
 
     public function testSession()

@@ -8,6 +8,8 @@ namespace AB\ABBundle\Manager;
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
  */
+use AB\ABBundle\TestSuite\ABTestSuiteInterface;
+
 interface ABTestSuiteManagerInterface
 {
 
@@ -27,4 +29,18 @@ interface ABTestSuiteManagerInterface
      */
     public function getTestSuite($uid);
 
+    /**
+     * Saves and persist a test suite
+     * 
+     * @param ABTestSuiteInterface $test
+     */
+    public function persist(ABTestSuiteInterface $test_suite);
+    
+    /**
+     * Removes a persisted test suite
+     * 
+     * @param ABTestSuiteInterface $test
+     */
+    public function remove(ABTestSuiteInterface $test_suite);
+    
 }
