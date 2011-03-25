@@ -1,9 +1,11 @@
 <?php
 
-namespace AB\ABBundle\Documents;
+namespace AB\ABBundle\Document;
+
+use AB\ABBundle\TestSuite\ABTestSuiteInterface;
 
 /**
- * @Document
+ * @mongodb:Document(collection="ab_test_suites")
  * @author Nicolas Chambrier <naholyr@gmail.com>
  *
  */
@@ -11,41 +13,50 @@ class ABTestSuiteDoctrineODMImpl implements ABTestSuiteInterface
 {
 
     /**
-     * @Id
+     * @mongodb:Id
      */
     private $id;
 
     /**
-     * @String
-     * @UniqueIndex(order="asc")
+     * @mongodb:String
+     * @mongodb:UniqueIndex(order="asc")
      */
     private $uid;
 
     /**
-     * @String
+     * @mongodb:String
      */
     private $description;
 
     /**
-     * @Collection
+     * @mongodb:Collection
      */
     private $versions = array();
 
     /**
-     * @Hash
+     * @mongodb:Hash
      */
     private $scores = array();
 
     /**
-     * @Hash
+     * @mongodb:Hash
      */
     private $replacements;
 
     /**
-     * @Boolean
+     * @mongodb:Boolean
      */
     private $active;
 
+    public function __construct($uid, array $versions = array('A', 'B'), $description = "")
+    {
+        $this->uid = $uid;
+        $this->description = $description;
+        foreach ($versions as $version) {
+            $this->addVersion($version);
+        }
+    }
+    
     public function getUID()
     {
         return $this->uid;
