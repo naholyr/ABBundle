@@ -6,7 +6,7 @@ use AB\ABBundle\Model\SessionInterface;
 use Symfony\Component\HttpFoundation\Session;
 use AB\ABBundle\TestSuite\ABTestSuiteInterface;
 
-class Session implements SessionInterface
+class HttpSession implements SessionInterface
 {
 
     protected $storage;

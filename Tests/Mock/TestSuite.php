@@ -48,7 +48,7 @@ class TestSuite implements TestSuiteInterface
             throw new ErrorUnavailableVersion();
         }
 
-        return @$this->replace[$version][$resource] ?: $resource;
+        return @$this->replace[$version][$resource];
     }
 
     public function addScore($version, $points = +1)

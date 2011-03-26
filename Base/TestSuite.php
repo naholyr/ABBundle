@@ -106,7 +106,7 @@ abstract class TestSuite implements TestSuiteInterface
     {
         $this->checkVersion($version);
 
-        return isset($this->replacements[$version][$resource]) ? $this->replacements[$version][$resource] : $resource;
+        return isset($this->replacements[$version][$resource]) ? $this->replacements[$version][$resource] : null;
     }
 
     public function addScore($version, $points = +1)

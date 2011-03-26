@@ -48,8 +48,8 @@ class MockTestCase extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals($this->test_suite->getResource('red', 'white'), 'red');
         $this->assertEquals($this->test_suite->getResource('blue', 'white'), 'blue');
-        $this->assertEquals($this->test_suite->getResource('red', 'black'), 'black');
-        $this->assertEquals($this->test_suite->getResource('blue', 'black'), 'black');
+        $this->assertEquals($this->test_suite->getResource('red', 'black'), null);
+        $this->assertEquals($this->test_suite->getResource('blue', 'black'), null);
     }
 
     public function testInvalidVersion()
