@@ -1,51 +1,46 @@
 <?php
 
-namespace AB\ABBundle\Document;
+namespace AB\ABBundle\Base;
 
-use AB\ABBundle\Model\TestSuiteInterface;
-use AB\ABBundle\Base\TestSuite as BaseTestSuite;
+use AB\ABBundle\Base\TestSuiteInterface;
 
 /**
- * @mongodb:Document(collection="ab_test_suites")
  * @author Nicolas Chambrier <naholyr@gmail.com>
  *
  */
-class TestSuite extends BaseTestSuite
+abstract class TestSuite implements TestSuiteInterface
 {
 
     /**
-     * @mongodb:Id
-     */
-    private $id;
-
-    /**
-     * @mongodb:String
-     * @mongodb:UniqueIndex(order="asc")
+     * Unique UID, should not be an automatic ID to stay human-readable, as
+     * it should be referenced in the code.
+     *
+     * @var string
      */
     private $uid;
 
     /**
-     * @mongodb:String
+     * @var string
      */
     private $description;
 
     /**
-     * @mongodb:Collection
+     * @var array
      */
     private $versions = array();
 
     /**
-     * @mongodb:Hash
+     * @var array
      */
     private $scores = array();
 
     /**
-     * @mongodb:Hash
+     * @var array
      */
     private $replacements;
 
     /**
-     * @mongodb:Boolean
+     * @var boolean
      */
     private $active;
 
@@ -57,7 +52,7 @@ class TestSuite extends BaseTestSuite
             $this->addVersion($version);
         }
     }
-    
+
     public function getUID()
     {
         return $this->uid;
@@ -90,7 +85,7 @@ class TestSuite extends BaseTestSuite
     {
         $this->checkVersion($version);
 
-        $this->replacements[$version] = array_merge(@$this->replacements[$version] ?: array(), $replacements);
+        $this->replacements[$version] = array_merge(isset($this->replacements[$version]) ? $this->replacements[$version] : array(), $replacements);
     }
 
     public function setReplacements($version, array $replacements)
@@ -100,11 +95,18 @@ class TestSuite extends BaseTestSuite
         $this->replacements[$version] = $replacements;
     }
 
+    public function getReplacements($version)
+    {
+        $this->checkVersion($version);
+
+        return isset($this->replacements[$version]) ? $this->replacements[$version] : null;
+    }
+
     public function getResource($version, $resource)
     {
         $this->checkVersion($version);
 
-        return @$this->replacements[$version][$resource] ?: $resource;
+        return isset($this->replacements[$version][$resource]) ? $this->replacements[$version][$resource] : $resource;
     }
 
     public function addScore($version, $points = +1)
@@ -121,6 +123,33 @@ class TestSuite extends BaseTestSuite
     public function getScores()
     {
         return $this->scores;
+    }
+
+    public function getScore($version)
+    {
+        $this->checkVersion($version);
+
+        return isset($this->scores[$version]) ? $this->scores[$version] : 0;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function setActive($boolean)
+    {
+        $this->active = $boolean;
+    }
+
+    public function isActive()
+    {
+        return $this->active;
     }
 
 }
