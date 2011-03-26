@@ -2,24 +2,22 @@
 
 namespace AB\ABBundle\Tests\Mock;
 
-use AB\ABBundle\Session\ABErrorNoVersionAvailable;
+use AB\ABBundle\Model\TestSuiteInterface;
+use AB\ABBundle\Model\ErrorNoVersionAvailable;
+use AB\ABBundle\Model\SessionInterface;
 
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
-
-use AB\ABBundle\Session\ABSessionInterface;
-
-class MockSession implements ABSessionInterface
+class Session implements SessionInterface
 {
 
     private $version = array();
 
-    public function getVersion(ABTestSuiteInterface $test_suite)
+    public function getVersion(TestSuiteInterface $test_suite)
     {
         $key = $test_suite->getUID();
         if (!isset($this->version[$key])) {
             $possibles = $test_suite->getAvailableVersions();
             if (count($possibles) == 0) {
-                throw new ABErrorNoVersionAvailable();
+                throw new ErrorNoVersionAvailable();
             } else {
                 $this->version[$key] = $possibles[array_rand($possibles)];
             }
@@ -28,7 +26,7 @@ class MockSession implements ABSessionInterface
         return $this->version[$key];
     }
 
-    public function setVersion(ABTestSuiteInterface $test_suite, $version)
+    public function setVersion(TestSuiteInterface $test_suite, $version)
     {
         $this->version[$test_suite->getUID()] = $version;
     }

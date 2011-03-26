@@ -2,11 +2,10 @@
 
 namespace AB\ABBundle\Tests\Mock;
 
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
+use AB\ABBundle\Model\TestSuiteInterface;
+use AB\ABBundle\Model\ManagerInterface;
 
-use AB\ABBundle\Manager\ABTestSuiteManagerInterface;
-
-class MockManager implements ABTestSuiteManagerInterface
+class Manager implements ManagerInterface
 {
 
     private $test_suites = array();
@@ -18,19 +17,19 @@ class MockManager implements ABTestSuiteManagerInterface
 
     public function getTestSuite($uid)
     {
-        $found = array_filter($this->test_suites, function(ABTestSuiteInterface $test_suite) use ($uid) {
+        $found = array_filter($this->test_suites, function(TestSuiteInterface $test_suite) use ($uid) {
             return $test_suite->getUID() == $uid;
         });
 
         return count($found) > 0 ? $found[0] : null;
     }
 
-    public function persist(ABTestSuiteInterface $test_suite)
+    public function persist(TestSuiteInterface $test_suite)
     {
         $this->test_suites[] = $test_suite;
     }
 
-    public function remove(ABTestSuiteInterface $test_suite)
+    public function remove(TestSuiteInterface $test_suite)
     {
         $found = null;
         foreach ($this->test_suites as $i => $persisted_test_suite) {

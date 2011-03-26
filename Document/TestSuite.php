@@ -2,14 +2,14 @@
 
 namespace AB\ABBundle\Document;
 
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
+use AB\ABBundle\Model\TestSuiteInterface;
 
 /**
  * @mongodb:Document(collection="ab_test_suites")
  * @author Nicolas Chambrier <naholyr@gmail.com>
  *
  */
-class ABTestSuiteDoctrineODMImpl implements ABTestSuiteInterface
+class TestSuite implements TestSuiteInterface
 {
 
     /**

@@ -1,10 +1,8 @@
 <?php
 
-use AB\ABBundle\Tests\Mock\MockTestSuite;
-require_once __DIR__ . '/../bootstrap.php';
-
-use AB\ABBundle\Tests\Mock\MockSession;
-use AB\ABBundle\Tests\Mock\MockManager;
+use AB\ABBundle\Tests\Mock\TestSuite;
+use AB\ABBundle\Tests\Mock\Session;
+use AB\ABBundle\Tests\Mock\Manager;
 
 class MockTestCase extends PHPUnit_Framework_TestCase
 {
@@ -15,11 +13,11 @@ class MockTestCase extends PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        $this->manager = new MockManager();
+        $this->manager = new Manager();
 
-        $this->session = new MockSession();
+        $this->session = new Session();
 
-        $this->test_suite = new MockTestSuite('colors', array('red', 'blue'));
+        $this->test_suite = new TestSuite('colors', array('red', 'blue'));
         $this->test_suite->addReplace('red', array('white' => 'red'));
         $this->test_suite->addReplace('blue', array('white' => 'blue'));
 
@@ -56,7 +54,7 @@ class MockTestCase extends PHPUnit_Framework_TestCase
 
     public function testInvalidVersion()
     {
-        $this->setExpectedException('AB\\ABBundle\\TestSuite\\ABErrorUnavailableVersion');
+        $this->setExpectedException('AB\\ABBundle\\Model\\ErrorUnavailableVersion');
         $this->test_suite->getResource('orange', 'white');
     }
 

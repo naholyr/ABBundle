@@ -1,11 +1,18 @@
 <?php
 
-spl_autoload_register(function($class_name) {
-    $root = realpath(__DIR__ . '/../../..');
+require_once $_SERVER['SYMFONY'].'/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
-    $file = $root . '/' . implode('/', explode('\\', $class_name)) . '.php';
+use Symfony\Component\ClassLoader\UniversalClassLoader;
 
-    if (file_exists($file)) {
-        require $file;
+$loader = new UniversalClassLoader();
+$loader->registerNamespace('Symfony', $_SERVER['SYMFONY']);
+$loader->register();
+
+spl_autoload_register(function($class)
+{
+    if (0 === strpos($class, 'AB\\ABBundle\\')) {
+        $path = implode('/', array_slice(explode('\\', $class), 2)).'.php';
+        require_once __DIR__.'/../'.$path;
+        return true;
     }
 });

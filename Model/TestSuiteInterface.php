@@ -1,6 +1,6 @@
 <?php
 
-namespace AB\ABBundle\TestSuite;
+namespace AB\ABBundle\Model;
 
 /**
  * AB test suite: basically, an A/B test suite consists of proposing
@@ -26,7 +26,7 @@ namespace AB\ABBundle\TestSuite;
  * $test_suite->addScore("original"), depending on what version is activated
  * for this user.
  * 
- * @see ABSessionInterface
+ * @see SessionInterface
  * 
  * Then, a few days later, just check $test_suite->getScores() and see which
  * one has the best score, if the difference is significant enough to you, and
@@ -34,7 +34,7 @@ namespace AB\ABBundle\TestSuite;
  * 
  * @author Nicolas Chambrier <naholyr@gmail.com>
  */
-interface ABTestSuiteInterface
+interface TestSuiteInterface
 {
 
     /**
@@ -45,7 +45,7 @@ interface ABTestSuiteInterface
     public function getUID();
 
     /**
-     * @return array(string) : available versions for this test suite.
+     * @return string[] : available versions for this test suite.
      */
     public function getAvailableVersions();
 
@@ -57,7 +57,7 @@ interface ABTestSuiteInterface
      * @return \Serializable : The corresponding resource in this test suite
      * for the current version.
      * 
-     * @throws ABErrorUnavailableVersion if the passed version does not
+     * @throws ErrorUnavailableVersion if the passed version does not
      * exist for this test suite.
      * 
      * @see setVersion()
@@ -71,7 +71,7 @@ interface ABTestSuiteInterface
      * 
      * @return int : new score for current version.
      * 
-     * @throws ABErrorUnavailableVersion if the passed version does not
+     * @throws ErrorUnavailableVersion if the passed version does not
      * exist for this test suite.
      * 
      * @see setVersion()

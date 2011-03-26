@@ -1,6 +1,6 @@
 <?php
 
-namespace AB\ABBundle\Manager;
+namespace AB\ABBundle\Model;
 
 /**
  * AB tests manager: a "manager" will basically
@@ -8,15 +8,13 @@ namespace AB\ABBundle\Manager;
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
  */
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
-
-interface ABTestSuiteManagerInterface
+interface ManagerInterface
 {
 
     /**
      * Returns all available tests suites.
      *
-     * @return array(ABTestSuiteInterface)
+     * @return TestSuiteInterface[]
      */
     public function getActiveTestSuites();
 
@@ -25,22 +23,22 @@ interface ABTestSuiteManagerInterface
      *
      * @param string $uid
      *
-     * @return ABTestSuiteInterface
+     * @return TestSuiteInterface
      */
     public function getTestSuite($uid);
 
     /**
      * Saves and persist a test suite
      * 
-     * @param ABTestSuiteInterface $test
+     * @param TestSuiteInterface $test
      */
-    public function persist(ABTestSuiteInterface $test_suite);
+    public function persist(TestSuiteInterface $test_suite);
     
     /**
      * Removes a persisted test suite
      * 
-     * @param ABTestSuiteInterface $test
+     * @param TestSuiteInterface $test
      */
-    public function remove(ABTestSuiteInterface $test_suite);
+    public function remove(TestSuiteInterface $test_suite);
     
 }

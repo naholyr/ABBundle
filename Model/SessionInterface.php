@@ -1,8 +1,6 @@
 <?php
 
-namespace AB\ABBundle\Session;
-
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
+namespace AB\ABBundle\Model;
 
 /**
  * AB test session: for each A/B test suite, you choose
@@ -12,31 +10,31 @@ use AB\ABBundle\TestSuite\ABTestSuiteInterface;
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
  */
-interface ABSessionInterface
+interface SessionInterface
 {
 
     /**
      * Get current version of the test suite for this session. If
      * no value is set yet, it should choose a random one.
      *
-     * @param ABTestSuiteInterface $test_suite
+     * @param TestSuiteInterface $test_suite
      *
      * @return string : a value amongst $test_suite->getAvailableVersions().
      * 
-     * @throws ABErrorNoVersionAvailable if the test suite has no available
+     * @throws ErrorNoVersionAvailable if the test suite has no available
      * version.
      */
-    public function getVersion(ABTestSuiteInterface $test_suite);
+    public function getVersion(TestSuiteInterface $test_suite);
 
     /**
      * Defines the version of the test suite to be used during this session.
      *
-     * @param ABTestSuiteInterface $test_suite
+     * @param TestSuiteInterface $test_suite
      * 
      * @param string $version
      *
      * @return void
      */
-    public function setVersion(ABTestSuiteInterface $test_suite, $version);
+    public function setVersion(TestSuiteInterface $test_suite, $version);
 
 }

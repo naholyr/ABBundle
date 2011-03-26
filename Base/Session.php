@@ -1,12 +1,12 @@
 <?php
 
-namespace AB\ABBundle\Session;
+namespace AB\ABBundle\Base;
 
+use AB\ABBundle\Model\SessionInterface;
 use Symfony\Component\HttpFoundation\Session;
-
 use AB\ABBundle\TestSuite\ABTestSuiteInterface;
 
-class ABSessionHttpImpl implements ABSessionInterface
+class Session implements SessionInterface
 {
 
     protected $storage;

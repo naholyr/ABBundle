@@ -2,13 +2,10 @@
 
 namespace AB\ABBundle\Tests\Mock;
 
-use AB\ABBundle\TestSuite\ABErrorUnavailableVersion;
+use AB\ABBundle\Model\TestSuiteInterface;
+use AB\ABBundle\Model\ErrorUnavailableVersion;
 
-use AB\ABBundle\TestSuite\ABErrorNoVersionSet;
-
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
-
-class MockTestSuite implements ABTestSuiteInterface
+class TestSuite implements TestSuiteInterface
 {
 
     private $uid = null;
@@ -29,7 +26,7 @@ class MockTestSuite implements ABTestSuiteInterface
     public function addReplace($version, array $replace)
     {
         if (!in_array($version, $this->getAvailableVersions())) {
-            throw new ABErrorUnavailableVersion();
+            throw new ErrorUnavailableVersion();
         }
 
         $this->replace[$version] = array_merge($this->replace[$version], $replace);
@@ -48,7 +45,7 @@ class MockTestSuite implements ABTestSuiteInterface
     public function getResource($version, $resource)
     {
         if (!in_array($version, $this->getAvailableVersions())) {
-            throw new ABErrorUnavailableVersion();
+            throw new ErrorUnavailableVersion();
         }
 
         return @$this->replace[$version][$resource] ?: $resource;
@@ -57,7 +54,7 @@ class MockTestSuite implements ABTestSuiteInterface
     public function addScore($version, $points = +1)
     {
         if (!in_array($version, $this->getAvailableVersions())) {
-            throw new ABErrorUnavailableVersion();
+            throw new ErrorUnavailableVersion();
         }
 
         $this->scores[$version] += $points;
