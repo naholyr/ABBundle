@@ -1,0 +1,16 @@
+services:
+  ab.testing.manager:
+    class: AB\ABBundle\Base\DoctrineManager
+    arguments:
+      - "@doctrine.odm.mongodb.default_document_manager" 
+      - "ABBundle:TestSuite" 
+      - "AB\ABBundle\Document\TestSuite"
+  ab.testing.session:
+    class: AB\ABBundle\Base\HttpSession
+    arguments:
+      - "@session"
+  ab.testing.service:
+    class: AB\ABBundle\Service\Service
+    arguments:
+      - "@ab.testing.manager"
+      - "@ab.testing.session"

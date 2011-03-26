@@ -33,6 +33,7 @@ namespace AB\ABBundle\Model;
  * take your decision before disabling the test.
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
  */
 interface TestSuiteInterface
 {

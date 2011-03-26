@@ -7,6 +7,10 @@ use AB\ABBundle\Model\TestSuiteInterface;
 use AB\ABBundle\Model\SessionInterface;
 use Symfony\Component\HttpFoundation\Session;
 
+/**
+ * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
+ */
 class HttpSession implements SessionInterface
 {
 

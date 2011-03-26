@@ -4,6 +4,10 @@ use AB\ABBundle\Tests\Mock\TestSuite;
 use AB\ABBundle\Tests\Mock\Session;
 use AB\ABBundle\Tests\Mock\Manager;
 
+/**
+ * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
+ */
 class MockTestCase extends PHPUnit_Framework_TestCase
 {
 

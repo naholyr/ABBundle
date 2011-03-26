@@ -6,6 +6,10 @@ use AB\ABBundle\Model\TestSuiteInterface;
 use AB\ABBundle\Model\ErrorNoVersionAvailable;
 use AB\ABBundle\Model\SessionInterface;
 
+/**
+ * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
+ */
 class Session implements SessionInterface
 {
 

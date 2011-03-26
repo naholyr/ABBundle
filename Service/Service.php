@@ -7,6 +7,10 @@ use AB\ABBundle\Document\TestSuite;
 use AB\ABBundle\Model\SessionInterface;
 use AB\ABBundle\Model\ManagerInterface;
 
+/**
+ * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
+ */
 class Service implements ServiceInterface
 {
 
@@ -63,6 +67,11 @@ class Service implements ServiceInterface
         } else {
             throw new \InvalidArgumentException();
         }
+    }
+
+    public function getCurrentTestSuite()
+    {
+        return $this->current_test_suite;
     }
 
     public function getResource($resource, $uid = null)

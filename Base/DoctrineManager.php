@@ -7,6 +7,10 @@ use AB\ABBundle\Model\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 
+/**
+ * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
+ */
 class DoctrineManager implements ManagerInterface
 {
 

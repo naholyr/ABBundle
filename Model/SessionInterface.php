@@ -9,6 +9,7 @@ namespace AB\ABBundle\Model;
  * the resources for this version of the test.
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
  */
 interface SessionInterface
 {

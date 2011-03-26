@@ -6,7 +6,7 @@ use AB\ABBundle\Model\TestSuiteInterface;
 
 /**
  * @author Nicolas Chambrier <naholyr@gmail.com>
- *
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
  */
 abstract class TestSuite implements TestSuiteInterface
 {

@@ -5,6 +5,10 @@ namespace AB\ABBundle\Tests\Mock;
 use AB\ABBundle\Model\TestSuiteInterface;
 use AB\ABBundle\Model\ManagerInterface;
 
+/**
+ * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
+ */
 class Manager implements ManagerInterface
 {
 

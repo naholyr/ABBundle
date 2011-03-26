@@ -9,6 +9,7 @@ use AB\ABBundle\Base\TestSuite as BaseTestSuite;
  * @mongodb:Document(collection="ab_test_suites")
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
  */
 class TestSuite extends BaseTestSuite
 {

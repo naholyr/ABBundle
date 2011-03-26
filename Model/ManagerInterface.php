@@ -7,6 +7,7 @@ namespace AB\ABBundle\Model;
  * handle the retrieving of test suites.
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
+ * @license MIT <http://www.opensource.org/licenses/mit-license.php>
  */
 interface ManagerInterface
 {
