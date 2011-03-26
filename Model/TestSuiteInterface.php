@@ -84,4 +84,35 @@ interface TestSuiteInterface
      */
     public function getScores();
 
+    /**
+     * Add resources replacements for this test suite.
+     *
+     * For each key "X", future calls to getResource("X") are expected to return
+     * $replacements["X"].
+     *
+     * Note that a simple call to this method is not expected to persist changes,
+     * you should call $manager->persist(...).
+     *
+     * @param string $version
+     * @param array $replacements
+     */
+    public function addReplacements($version, array $replacements);
+
+    /**
+     * Is the test suite active (enabled) ?
+     *
+     * @return boolean
+     */
+    public function isActive();
+
+    /**
+     * Enable or disable test suite.
+     *
+     * Note that a simple call to this method is not expected to persist changes,
+     * you should call $manager->persist(...).
+     *
+     * @param boolean $boolean
+     */
+    public function setActive($boolean);
+
 }

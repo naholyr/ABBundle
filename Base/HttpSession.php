@@ -2,21 +2,25 @@
 
 namespace AB\ABBundle\Base;
 
+use AB\ABBundle\Model\ErrorNoVersionAvailable;
+use AB\ABBundle\Model\TestSuiteInterface;
 use AB\ABBundle\Model\SessionInterface;
 use Symfony\Component\HttpFoundation\Session;
-use AB\ABBundle\TestSuite\ABTestSuiteInterface;
 
 class HttpSession implements SessionInterface
 {
 
     protected $storage;
 
-    public function __construct(Session $storage)
+    protected $key_prefix;
+
+    public function __construct(Session $storage, $key_prefix = 'ABBundle/Session/')
     {
         $this->storage = $storage;
+        $this->key_prefix = $key_prefix;
     }
 
-    public function getVersion(ABTestSuiteInterface $test_suite)
+    public function getVersion(TestSuiteInterface $test_suite)
     {
         $key = $this->getKey($test_suite);
         if ($this->storage->has($key)) {
@@ -29,23 +33,23 @@ class HttpSession implements SessionInterface
         return $value;
     }
 
-    private function getKey(ABTestSuiteInterface $test_suite)
+    private function getKey(TestSuiteInterface $test_suite)
     {
-        return sprintf('ABBundle/Session/%s', $test_suite->getUID());
+        return $this->key_prefix . $test_suite->getUID();
     }
 
-    private function randomize(ABTestSuiteInterface $test_suite)
+    private function randomize(TestSuiteInterface $test_suite)
     {
         $possibles = $test_suite->getAvailableVersions();
 
         if (count($possibles) == 0) {
-            throw new ABErrorNoVersionAvailable();
+            throw new ErrorNoVersionAvailable();
         }
 
         return $possibles[array_rand($possibles)];
     }
 
-    public function setVersion(ABTestSuiteInterface $test_suite, $version)
+    public function setVersion(TestSuiteInterface $test_suite, $version)
     {
         $this->storage->set($this->getKey($test_suite), $version);
     }

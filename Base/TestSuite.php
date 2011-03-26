@@ -2,7 +2,7 @@
 
 namespace AB\ABBundle\Base;
 
-use AB\ABBundle\Base\TestSuiteInterface;
+use AB\ABBundle\Model\TestSuiteInterface;
 
 /**
  * @author Nicolas Chambrier <naholyr@gmail.com>
@@ -17,32 +17,32 @@ abstract class TestSuite implements TestSuiteInterface
      *
      * @var string
      */
-    private $uid;
+    protected $uid;
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @var array
      */
-    private $versions = array();
+    protected $versions = array();
 
     /**
      * @var array
      */
-    private $scores = array();
+    protected $scores = array();
 
     /**
      * @var array
      */
-    private $replacements;
+    protected $replacements;
 
     /**
      * @var boolean
      */
-    private $active;
+    protected $active;
 
     public function __construct($uid, array $versions = array('A', 'B'), $description = "")
     {
@@ -51,6 +51,7 @@ abstract class TestSuite implements TestSuiteInterface
         foreach ($versions as $version) {
             $this->addVersion($version);
         }
+        $this->active = true;
     }
 
     public function getUID()
@@ -58,7 +59,7 @@ abstract class TestSuite implements TestSuiteInterface
         return $this->uid;
     }
 
-    private function checkVersion($version)
+    protected function checkVersion($version)
     {
         if (!in_array($version, $this->versions)) {
             throw new ABErrorUnavailableVersion();

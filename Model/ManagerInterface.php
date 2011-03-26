@@ -28,17 +28,28 @@ interface ManagerInterface
     public function getTestSuite($uid);
 
     /**
-     * Saves and persist a test suite
-     * 
+     * Saves and persist a test suite.
+     *
      * @param TestSuiteInterface $test
      */
     public function persist(TestSuiteInterface $test_suite);
-    
+
     /**
-     * Removes a persisted test suite
-     * 
+     * Removes a persisted test suite.
+     *
      * @param TestSuiteInterface $test
      */
     public function remove(TestSuiteInterface $test_suite);
-    
+
+    /**
+     * Initializes a new test suite.
+     * A new test suite is active by default.
+     *
+     * @param string $uid
+     * @param array $versions
+     *
+     * @return TestSuiteInterface
+     */
+    public function newTestSuite($uid, array $versions = array('A', 'B'));
+
 }

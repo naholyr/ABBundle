@@ -20,7 +20,7 @@ interface SessionInterface
      * @param TestSuiteInterface $test_suite
      *
      * @return string : a value amongst $test_suite->getAvailableVersions().
-     * 
+     *
      * @throws ErrorNoVersionAvailable if the test suite has no available
      * version.
      */
@@ -30,7 +30,7 @@ interface SessionInterface
      * Defines the version of the test suite to be used during this session.
      *
      * @param TestSuiteInterface $test_suite
-     * 
+     *
      * @param string $version
      *
      * @return void

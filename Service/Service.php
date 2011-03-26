@@ -94,4 +94,14 @@ class Service implements ServiceInterface
         $this->manager->persist($test_suite);
     }
 
+    public function getScores($uid = null)
+    {
+        if (is_null($uid) && is_null($this->current_test_suite)) {
+            throw new ErrorNoCurrentTestSuite();
+        }
+        $test_suite = is_null($uid) ? $this->current_test_suite : $this->getTestSuite($uid);
+
+        return $test_suite->getScores();
+    }
+
 }
