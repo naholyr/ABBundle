@@ -14,20 +14,14 @@ Installation
 
 Install the bundle as you're used to. For example if your project is versionned using Git: ::
 
-.. code-block:: bash
-
    git add submodule "https://github.com/naholyr/ABBundle.git" "src/AB/ABBundle"
 
-Add the bundle to your autoload:
-
-.. code-block:: php
+Add the bundle to your autoload: ::
 
    // app/autoload.php
    $loader->registerNamespace('AB', __DIR__.'/../src');
 
-Enable the bundle in your application's kernel:
-
-.. code-block:: php
+Enable the bundle in your application's kernel: ::
 
    // app/AppKernel.php
    // public function registerBundles() ...
@@ -44,9 +38,7 @@ To store your test suites, you need to provide a persistence backend.
 
 Two drivers are provided: ``odm`` (Doctrine MongoDB) or ``orm`` (Doctrine ORM).
 
-Specify your driver in your configuration:
-
-.. code-block:: yaml
+Specify your driver in your configuration: ::
 
    # app/config/config.yml
    ab:
@@ -73,7 +65,7 @@ TODO
 Legacy documentation
 ********************
 
-.. code-block:: markdown
+::
 
     ### Usage
 
