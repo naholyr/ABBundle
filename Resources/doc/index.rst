@@ -1,4 +1,3 @@
-
 ###########################################
 A/B Testing Symfony2 Bundle - documentation
 ###########################################
@@ -7,6 +6,9 @@ A/B testing consists of providing different presentations to your users,
 and choose the one that works best.
 
 See `definition on Wikipedia <http://en.wikipedia.org/wiki/A/B_testing>`_.
+
+This bundle is intended to provide you some shortcuts to ease automation of those
+tests in your application.
 
 ************
 Installation
