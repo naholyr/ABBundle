@@ -16,7 +16,8 @@ class ABExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('config.yml');
+        $loader->load('service.yml');
+        $loader->load('driver_orm.yml');
     }
 
 }
