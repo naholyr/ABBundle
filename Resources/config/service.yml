@@ -1,10 +1,16 @@
 services:
-  ab.testing.session:
+  ab.manager:
+    class: AB\ABBundle\Base\DoctrineManager
+    arguments:
+      - "@ab.persistence_service" 
+      - "%ab.model_repository%" 
+      - "%ab.model_class%"
+  ab.session:
     class: AB\ABBundle\Base\HttpSession
     arguments:
       - "@session"
-  ab.testing.service:
+  ab.service:
     class: AB\ABBundle\Service\Service
     arguments:
-      - "@ab.testing.manager"
-      - "@ab.testing.session"
+      - "@ab.manager"
+      - "@ab.session"

@@ -1,7 +1,4 @@
-services:
-  ab.testing.manager:
-    class: AB\ABBundle\Base\DoctrineManager
-    arguments:
-      - "@doctrine.odm.mongodb.default_document_manager" 
-      - "ABBundle:TestSuite" 
-      - "AB\ABBundle\Document\TestSuite"
+parameters:
+  ab.model_repository: "ABBundle:TestSuite"
+  ab.model_class: "AB\\ABBundle\\Document\\TestSuite"
+  ab.persistence_service: "doctrine.odm.mongodb.default_document_manager"

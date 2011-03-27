@@ -1,7 +1,4 @@
-services:
-  ab.testing.manager:
-    class: AB\ABBundle\Base\DoctrineManager
-    arguments:
-      - "@doctrine.orm.default_entity_manager" 
-      - "ABBundle:TestSuite" 
-      - "AB\ABBundle\Entity\TestSuite"
+parameters:
+  ab.model_repository: "ABBundle:TestSuite"
+  ab.model_class: "AB\\ABBundle\\Entity\\TestSuite"
+  ab.persistence_service: "doctrine.orm.default_entity_manager"
