@@ -9,7 +9,7 @@ namespace AB\ABBundle\Service;
  *
  * 1. Create your test suite
  *
- * $ab = $this->get('ab.testing.service');
+ * $ab = $this->get('ab');
  * $m = $ab->getManager();
  * $t = $m->newTestSuite('register_label'); // Default versions: A and B
  * $t->addReplacements('A', array('Click here' => 'Click here to register for free')); // Version A
@@ -18,17 +18,17 @@ namespace AB\ABBundle\Service;
  *
  * 2. In your source page, get the label depending on version randomly stored in user's session
  *
- * $ab = $this->get('ab.testing.service');
+ * $ab = $this->get('ab');
  * $label = $ab->getResource('Click here', 'register_label');
  *
  * 3. In your target page, give points to the current version, which has brought you a user :)
  *
- * $ab = $this->get('ab.testing.service');
+ * $ab = $this->get('ab');
  * $ab->addScore(+1, 'register_label');
  *
  * 4. Check the scores, and make your choice wisely !
  *
- * $ab = $this->get('ab.testing.service');
+ * $ab = $this->get('ab');
  * $scores = $ab->getScores('register_label');
  * $winner = $scores['A'] > $scores['B'] ? 'A' : 'B';
  * $loser = $winner == 'A' ? 'B' : 'A';

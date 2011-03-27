@@ -25,6 +25,13 @@ class ABExtension extends Extension
             throw new \InvalidArgumentException('Invalid DB driver for ABBundle, check "ab.db_driver" configuration.');
         }
 
+        // Service class names
+        foreach ($configuration->getDefaultServiceClasses() as $name => $value) {
+            if (!$container->hasParameter($name)) {
+                $container->setParameter($name, $value);
+            }
+        }
+
         // Config = YAML files (yep, I hate XML and it won't change now :P)
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
@@ -34,17 +41,24 @@ class ABExtension extends Extension
         }
 
         // Eventually override some parameters from driver's config
-        if (!empty($config['model_repository'])) {
-            $container->setParameter('ab.model_repository', $config['model_repository']);
-        }
-        if (!empty($config['model_class'])) {
-            $container->setParameter('ab.model_class', $config['model_class']);
+        foreach ($configuration->getParameterNames() as $name) {
+            if (isset($config[$name]) && !empty($config[$name])) {
+                $container->setParameter('ab.'.$name, $config[$name]);
+            }
         }
 
-        // Alias the persistence service (declared as parameter by driver)
-        $container->setAlias('ab.persistence_service', $container->getParameter('ab.persistence_service'));
+        // Persistence service
+        if ($container->hasParameter('ab.persistence_service')) {
+            $container->setAlias('ab.persistence_service', $container->getParameter('ab.persistence_service'));
+        }
+        if ($db_driver != 'custom') {
+            $loader->load('manager.yml');
+        }
 
-        // Load service definition, based on previous parameters
+        // Session service
+        $loader->load('session.yml');
+
+        // A/B service
         $loader->load('service.yml');
     }
 

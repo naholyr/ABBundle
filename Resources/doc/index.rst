@@ -31,8 +31,12 @@ Enable the bundle in your application's kernel: ::
 Configuration
 *************
 
-Persistence driver
-==================
+There are two main components in this bundle:
+#. The "manager" will handle the persistence layer.
+#. The "session" will handle the affectation of test suites' version to a user.
+
+Manager (persistence layer)
+===========================
 
 To store your test suites, you need to provide a persistence backend.
 
@@ -44,13 +48,58 @@ Specify your driver in your configuration: ::
    ab:
       db_driver: odm 
 
-Customize persistence backend
-=============================
+Customize model
+---------------
 
-TODO
+The first thing you may want to configure is the ``TestSuite`` object itself.
 
-* Writing manager
-* Overriding model class
+To achieve this goal, write your own object model, that should at least implement 
+``AB\ABBundle\Model\TestSuiteInterface``. You should override ``AB\ABBundle\Base\TestSuite``,
+a basic, persistence agnostic, implementation. The default manager expects a constructor
+compatible with this implementation: ::
+
+   __construct($uid, array $versions = array('A', 'B'))
+
+Then you must tell the manager to use this class, and the Doctrine manager to use
+the corresponding repository: ::
+
+   # app/config/config.yml
+   ab:
+      model_repository: "MyBundle:TestSuite"
+      model_class: "Me\\MyBundle\\Entity\\TestSuite"
+
+Customize manager
+-----------------
+
+To provide your own manager, just create yours implementing ``AB\ABBundle\Model\ManagerInterface``.
+
+Your constructor must be compatible with ``AB\ABBundle\Base\DoctrineManager``'s one: ::
+
+   __construct(ObjectManager $object_manager, $model_repository, $model_class)
+
+Then declare its class name in your configuration: ::
+
+   # app/config/config.yml
+   ab:
+      manager_class: "Me\\MyBundle\\MyOwnABManager"
+
+Customize the whole persistence layer
+-------------------------------------
+
+If you don't use Doctrine, or wrote a manager which is incompatible with base implementation,
+then you can use the "custom" DB driver, which means you will have to declare yourself the
+``ab.manager`` service: ::
+
+   # app/config/config.yml
+   ab:
+      db_driver: custom # means you will provide everything
+      persistence_service: "the.persistence.service.id"
+   services:
+      ab.manager:
+         class: "Me\\MyBundle\\MyOwnABManager"
+         arguments:
+            - "@ab.persistence"
+            ... 
 
 Session driver
 ==============
@@ -61,9 +110,12 @@ TODO
 * Customizing the session driver
 * Default HttpSession
 
-********************
+*****
+Usage
+*****
+
 Legacy documentation
-********************
+====================
 
 ::
 
@@ -73,7 +125,7 @@ Legacy documentation
 
     1 - Create your test suite
 
-        $ab = $this->get('ab.testing.service');
+        $ab = $this->get('ab');
         $m = $ab->getManager();
         $t = $m->newTestSuite('register_label'); // Default versions: A and B
         $t->addReplacements('A', array('Click here' => 'Click here to register for free')); // Version A
@@ -82,17 +134,17 @@ Legacy documentation
 
     2 - In your source page, get the label depending on version randomly stored in user's session
 
-        $ab = $this->get('ab.testing.service');
+        $ab = $this->get('ab');
         $label = $ab->getResource('Click here', 'register_label');
 
     3 - In your target page, give points to the current version, which has brought you a user :)
 
-        $ab = $this->get('ab.testing.service');
+        $ab = $this->get('ab');
         $ab->addScore(+1, 'register_label');
 
     4 - Check the scores, and make your choice wisely !
 
-        $ab = $this->get('ab.testing.service');
+        $ab = $this->get('ab');
         $scores = $ab->getScores('register_label');
         $winner = $scores['A'] > $scores['B'] ? 'A' : 'B';
         $loser = $winner == 'A' ? 'B' : 'A';

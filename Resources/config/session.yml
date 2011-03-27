@@ -1,0 +1,5 @@
+services:
+  ab.session:
+    class: "%ab.session_class%"
+    arguments:
+      - "@session"

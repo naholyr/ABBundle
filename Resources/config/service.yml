@@ -1,16 +1,6 @@
 services:
-  ab.manager:
-    class: AB\ABBundle\Base\DoctrineManager
-    arguments:
-      - "@ab.persistence_service" 
-      - "%ab.model_repository%" 
-      - "%ab.model_class%"
-  ab.session:
-    class: AB\ABBundle\Base\HttpSession
-    arguments:
-      - "@session"
-  ab.service:
-    class: AB\ABBundle\Service\Service
+  ab:
+    class: "%ab.service_class%"
     arguments:
       - "@ab.manager"
       - "@ab.session"

@@ -1,0 +1,7 @@
+services:
+  ab.manager:
+    class: "%ab.manager_class%"
+    arguments:
+      - "@ab.persistence_service" 
+      - "%ab.model_repository%" 
+      - "%ab.model_class%"
