@@ -1,0 +1,25 @@
+# MongoDB
+ab:
+  db_driver: odm
+
+# Using embedded document
+doctrine_mongo_db:
+  document_managers:
+    default:
+      mappings:
+        ...  
+        ABBundle: ~
+
+
+# ORM
+ab:
+  db_driver: odm
+
+# Using embedded entity
+doctrine:
+  orm:
+    entity_managers:
+      default:
+        mappings:
+          ...
+          ABBundle: ~
