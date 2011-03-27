@@ -48,4 +48,9 @@ class Manager implements ManagerInterface
         }
     }
 
+    public function newTestSuite($uid, array $versions = array('A', 'B'))
+    {
+        return new TestSuite($uid, $versions);
+    }
+
 }

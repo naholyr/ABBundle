@@ -2,6 +2,8 @@
 
 namespace AB\ABBundle\Tests\Mock;
 
+use Symfony\Component\Locale\Exception\NotImplementedException;
+
 use AB\ABBundle\Model\TestSuiteInterface;
 use AB\ABBundle\Model\ErrorUnavailableVersion;
 
@@ -27,7 +29,7 @@ class TestSuite implements TestSuiteInterface
         }
     }
 
-    public function addReplace($version, array $replace)
+    public function addReplacements($version, array $replace)
     {
         if (!in_array($version, $this->getAvailableVersions())) {
             throw new ErrorUnavailableVersion();
@@ -67,6 +69,16 @@ class TestSuite implements TestSuiteInterface
     public function getScores()
     {
         return $this->scores;
+    }
+
+    public function isActive()
+    {
+        return true;
+    }
+
+    public function setActive($boolean)
+    {
+        throw new NotImplementedException();
     }
 
 }

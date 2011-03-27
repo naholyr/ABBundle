@@ -21,9 +21,9 @@ class MockTestCase extends PHPUnit_Framework_TestCase
 
         $this->session = new Session();
 
-        $this->test_suite = new TestSuite('colors', array('red', 'blue'));
-        $this->test_suite->addReplace('red', array('white' => 'red'));
-        $this->test_suite->addReplace('blue', array('white' => 'blue'));
+        $this->test_suite = $this->manager->newTestSuite('colors', array('red', 'blue'));
+        $this->test_suite->addReplacements('red', array('white' => 'red'));
+        $this->test_suite->addReplacements('blue', array('white' => 'blue'));
 
         $this->manager->persist($this->test_suite);
     }
