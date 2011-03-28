@@ -86,7 +86,10 @@ abstract class TestSuite implements TestSuiteInterface
     {
         $this->checkVersion($version);
 
-        $this->replacements[$version] = array_merge(isset($this->replacements[$version]) ? $this->replacements[$version] : array(), $replacements);
+        $result = isset($this->replacements[$version]) ? $this->replacements[$version] : array();
+        $result = array_merge($result, $replacements);
+
+        $this->replacements[$version] = $result;
     }
 
     public function setReplacements($version, array $replacements)

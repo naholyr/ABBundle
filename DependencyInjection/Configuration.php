@@ -16,8 +16,7 @@ class Configuration
         $root->children()
         ->scalarNode('db_driver')->isRequired()->cannotBeEmpty()->end()
         ->scalarNode('model_class')->defaultNull()->end()
-        ->scalarNode('model_repository')->defaultNull()->end()
-        ;
+        ->scalarNode('model_repository')->defaultNull()->end();
 
         return $builder->buildTree();
     }
@@ -26,8 +25,8 @@ class Configuration
     {
         return array(
             'ab.manager_class' => 'AB\\ABBundle\\Base\\DoctrineManager',
-   	        'ab.session_class' => 'AB\\ABBundle\\Base\\HttpSession',
-   	        'ab.service_class' => 'AB\\ABBundle\\Service\\Service',
+            'ab.session_class' => 'AB\\ABBundle\\Base\\HttpSession',
+            'ab.service_class' => 'AB\\ABBundle\\Service\\Service',
         );
     }
 
