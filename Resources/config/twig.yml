@@ -1,0 +1,7 @@
+services:
+  ab.twig:
+    class: "AB\\ABBundle\\Extension\\ABTwigExtension"
+    tags:
+      - { name: twig.extension }
+    arguments: 
+      - "@ab"

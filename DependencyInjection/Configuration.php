@@ -16,7 +16,8 @@ class Configuration
         $root->children()
         ->scalarNode('db_driver')->isRequired()->cannotBeEmpty()->end()
         ->scalarNode('model_class')->defaultNull()->end()
-        ->scalarNode('model_repository')->defaultNull()->end();
+        ->scalarNode('model_repository')->defaultNull()->end()
+        ->scalarNode('load_twig_extension')->defaultValue(true)->treatNullLike(true)->end();
 
         return $builder->buildTree();
     }

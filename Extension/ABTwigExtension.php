@@ -1,0 +1,34 @@
+<?php
+
+namespace AB\ABBundle\Extension;
+
+use AB\ABBundle\Service\Service;
+
+class ABTwigExtension extends \Twig_Extension
+{
+
+    protected $ab_service;
+
+    public function __construct(Service $ab_service)
+    {
+        $this->ab_service = $ab_service;
+    }
+
+    public function getName()
+    {
+        return 'ab';
+    }
+
+    public function getFilters()
+    {
+        return array(
+            'ab' => new \Twig_Filter_Method($this, 'replace'),
+        );
+    }
+
+    public function replace($resource, $uid)
+    {
+        return $this->ab_service->getResource($resource, $uid);
+    }
+
+}

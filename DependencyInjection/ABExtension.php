@@ -60,6 +60,11 @@ class ABExtension extends Extension
 
         // A/B service
         $loader->load('service.yml');
+        
+        // Twig extension
+        if (is_null($config['load_twig_extension']) || $config['load_twig_extension']) {
+            $loader->load('twig.yml');
+        }
     }
 
 }
