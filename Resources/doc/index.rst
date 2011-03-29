@@ -160,3 +160,49 @@ Legacy documentation
         $ab->setCurrentTestSuite('register_label');
 
     After this call, you can omit UID in those methods.
+
+Creating test suites
+====================
+
+Using API
+---------
+
+TODO
+
+Using embedded UI
+-----------------
+
+TODO
+
+Using your test suites
+======================
+
+In your controller
+------------------
+
+TODO
+
+In your views
+-------------
+
+Use the provided Twig filter "``ab``". ::
+
+   {{ "hello" | ab("my_test_suite") }}
+   → <?php echo $ab->getResource("hello", "my_test_suite") ?>
+   → "hello"
+   
+   {{ "hello, %dude%" | ab("my_test_suite", {"%dude%": "dude's name"}) }}
+   → <?php echo strtr($ab->getResource("hello, %dude%", "my_test_suite"), array("%dude%" => "dude's name")) ?>
+   → "hello, dude's name"
+
+If you don't want to use this feature, you can disable the Twig extension in configuration: ::
+
+   # app/config/config.yml
+   ab:
+     load_twig_extension: false
+
+For your assets
+---------------
+
+TODO
+
