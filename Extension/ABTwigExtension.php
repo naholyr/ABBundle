@@ -22,13 +22,19 @@ class ABTwigExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'ab' => new \Twig_Filter_Method($this, 'replace'),
+            'ab' => new \Twig_Filter_Method($this, 'getResource'),
         );
     }
 
-    public function replace($resource, $uid)
+    public function getResource($resource, $uid, array $parameters = null)
     {
-        return $this->ab_service->getResource($resource, $uid);
+        $resource = $this->ab_service->getResource($resource, $uid);
+
+        if (is_string($resource) && is_array($parameters)) {
+            $resource = strtr($resource, $parameters);
+        }
+
+        return $resource;
     }
 
 }
