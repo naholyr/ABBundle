@@ -5,8 +5,10 @@ namespace AB\ABBundle\Document;
 use AB\ABBundle\Model\TestSuiteInterface;
 use AB\ABBundle\Base\TestSuite as BaseTestSuite;
 
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+
 /**
- * @mongodb:Document(collection="ab_test_suites")
+ * @ODM\Document(collection="ab_test_suites")
  *
  * @author Nicolas Chambrier <naholyr@gmail.com>
  * @license MIT <http://www.opensource.org/licenses/mit-license.php>
@@ -15,38 +17,38 @@ class TestSuite extends BaseTestSuite
 {
 
     /**
-     * @mongodb:Id
+     * @ODM\Id
      */
     protected $id;
 
     /**
-     * @mongodb:String
-     * @mongodb:UniqueIndex(order="asc")
+     * @ODM\String
+     * @ODM\UniqueIndex(order="asc")
      */
     protected $uid;
 
     /**
-     * @mongodb:String
+     * @ODM\String
      */
     protected $description;
 
     /**
-     * @mongodb:Collection
+     * @ODM\Collection
      */
     protected $versions = array();
 
     /**
-     * @mongodb:Hash
+     * @ODM\Hash
      */
     protected $scores = array();
 
     /**
-     * @mongodb:Hash
+     * @ODM\Hash
      */
     protected $replacements;
 
     /**
-     * @mongodb:Boolean
+     * @ODM\Boolean
      */
     protected $active;
 

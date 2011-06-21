@@ -1,4 +1,4 @@
 parameters:
-  ab.model_repository: "AB:TestSuite"
+  ab.model_repository: "ABBundle:TestSuite"
   ab.model_class: "AB\\ABBundle\\Entity\\TestSuite"
   ab.persistence_service: "doctrine.orm.default_entity_manager"
